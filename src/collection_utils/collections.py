@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any, Iterable, List, Optional
 
 
-def remove_empties_from_dict(a_dict: dict) -> Optional[dict]:
+def remove_empties_from_dict(a_dict: dict) -> dict | None:
     """Remove keys with value None, recursively."""
     result: dict = {}
     for key, value in a_dict.items():
@@ -24,7 +24,7 @@ def remove_empties_from_dict(a_dict: dict) -> Optional[dict]:
     return result or None
 
 
-def _wrap_single(value: Any) -> List[Any]:
+def _wrap_single(value: Any) -> list[Any]:
     """Wrap a scalar value in a list."""
     return [value]
 
@@ -43,14 +43,14 @@ def ensure_list(maybe_list: Any) -> List[Any]:
     return maybe_list if isinstance(maybe_list, list) else _wrap_single(maybe_list)
 
 
-def compact(values: Iterable[Any]) -> List[Any]:
+def compact(values: Iterable[Any]) -> list[Any]:
     """Return a list with all None values removed."""
     return [value for value in values if value is not None]
 
 
-def flatten(items: Iterable[Any]) -> List[Any]:
+def flatten(items: Iterable[Any]) -> list[Any]:
     """Flatten one level of nested iterables (list/tuple/set)."""
-    flat: List[Any] = []
+    flat: list[Any] = []
     for item in items:
         if isinstance(item, (list, tuple, set)):
             flat.extend(item)
@@ -66,14 +66,14 @@ def set_if_not_none(obj: object, field: str, value: Optional[Any], overwrite: bo
             setattr(obj, field, value)
 
 
-def maybe_int(value: Any) -> Optional[int]:
+def maybe_int(value: Any) -> int | None:
     try:
         return int(value)
     except (ValueError, TypeError):
         return None
 
 
-def maybe_float(value: Any) -> Optional[float]:
+def maybe_float(value: Any) -> float | None:
     try:
         return float(value)
     except (ValueError, TypeError):

@@ -7,8 +7,8 @@ Small helpers for lists, dicts, and safe conversions.
 Install from source:
 
 ```bash
-git clone <repo-url>
-cd <repo-name>
+git clone https://github.com/larsderidder/collection-helpers.git
+cd collection-helpers
 python -m venv .venv
 . .venv/bin/activate
 python -m pip install -U pip
