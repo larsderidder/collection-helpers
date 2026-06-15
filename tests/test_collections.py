@@ -1,5 +1,6 @@
 from collection_utils import (
     compact,
+    ensure_iterable,
     ensure_list,
     flatten,
     maybe_float,
@@ -17,6 +18,11 @@ def test_remove_empties():
 def test_ensure_list():
     assert ensure_list(1) == [1]
     assert ensure_list([1, 2]) == [1, 2]
+
+
+def test_ensure_iterable_treats_strings_as_scalar():
+    assert list(ensure_iterable("abc")) == ["abc"]
+    assert list(ensure_iterable(["abc"])) == ["abc"]
 
 
 def test_maybe_int_and_float():

@@ -30,7 +30,9 @@ def _wrap_single(value: Any) -> list[Any]:
 
 
 def ensure_iterable(maybe_iterable: Any) -> Iterable[Any]:
-    """Make sure the input is iterable."""
+    """Make sure the input is iterable, treating strings as scalar values."""
+    if isinstance(maybe_iterable, (str, bytes)):
+        return _wrap_single(maybe_iterable)
     try:
         iter(maybe_iterable)
     except TypeError:
@@ -59,7 +61,9 @@ def flatten(items: Iterable[Any]) -> list[Any]:
     return flat
 
 
-def set_if_not_none(obj: object, field: str, value: Optional[Any], overwrite: bool = False) -> None:
+def set_if_not_none(
+    obj: object, field: str, value: Optional[Any], overwrite: bool = False
+) -> None:
     """Set the value if it is not None."""
     if value is not None:
         if overwrite or getattr(obj, field) in (None, ""):
